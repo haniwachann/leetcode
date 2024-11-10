@@ -155,7 +155,7 @@ https://github.com/goto-untrapped/Arai60/pull/23/files
 
 実施しました。
 
-# step4
+# step4_1
 
 レビューを受けて、コードを修正する。
 再度3回連続acceptされるまで続ける。
@@ -196,4 +196,33 @@ public:
  * KthLargest* obj = new KthLargest(k, nums);
  * int param_1 = obj->add(val);
  */
+```
+
+# step4_2
+関数に処理をまとめました。
+
+```C++
+class KthLargest {
+private:
+    map<int,int> candidates;
+    int kth;
+    void add_num_to_candidates(int nums_add){
+        candidates[nums_add]++;
+        candidates.begin()->second--;
+        if (candidates.begin()->second<=0) {
+            candidates.erase(candidates.begin());
+        }
+    }
+public:
+    KthLargest(int k, vector<int>& nums) {
+        kth=k;
+
+        for (int i=0; i<k; i++) candidates[nums[i]]++;
+        for (int i=k; i<size(nums); i++) add_num_to_candidates(nums[i]);
+    }
+    int add(int val) {
+        add_num_to_candidates(val);
+        return candidates.begin()->first;
+    }
+};
 ```
