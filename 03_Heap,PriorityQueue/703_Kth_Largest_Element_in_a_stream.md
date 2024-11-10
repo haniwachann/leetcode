@@ -154,3 +154,46 @@ https://github.com/goto-untrapped/Arai60/pull/23/files
 今度は、時間を測りながら、もう一回、書きましょう。書いてアクセプトされたら文字消してもう一回書く。これを10分以内に一回もエラーを出さずに書ける状態になるまで続ける。3回続けてそれができたらその問題はOK。
 
 実施しました。
+
+# step4
+
+レビューを受けて、コードを修正する。
+再度3回連続acceptされるまで続ける。
+
+```c++
+class KthLargest {
+private:
+    map<int,int> canditates;
+    int kth;
+
+public:
+    KthLargest(int k, vector<int>& nums) {
+        kth=k;
+
+        for (int i=0; i<k; i++) {
+            canditates[nums[i]]++;
+        }
+        for (int i=k; i<size(nums); i++) {
+            canditates[nums[i]]++;
+            canditates.begin()->second--;
+            if (canditates.begin()->second<=0) {
+                canditates.erase(canditates.begin());
+            }
+        }
+    }
+    int add(int val) {
+        canditates[val]++;
+        canditates.begin()->second--;
+        if (canditates.begin()->second<=0) {
+            canditates.erase(canditates.begin());
+        }
+        return canditates.begin()->first;
+    }
+};
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest* obj = new KthLargest(k, nums);
+ * int param_1 = obj->add(val);
+ */
+```
