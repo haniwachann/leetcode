@@ -226,3 +226,39 @@ public:
     }
 };
 ```
+
+# step4_3
+・初期配列が空の時を対処。
+・配列がkth以下の時は削除処理をしないように修正。
+```c++
+class KthLargest {
+private:
+    map<int,int> candidates;
+    int candidates_counter=0;
+    int kth;
+    void add_num_to_candidates(int nums_add){
+        candidates[nums_add]++;
+        candidates_counter++;
+        if (candidates_counter>kth) {
+            candidates.begin()->second--;
+            if (candidates.begin()->second<=0) {
+                candidates.erase(candidates.begin());
+            }
+        }
+    }
+public:
+    KthLargest(int k, vector<int>& nums) {
+        kth=k;
+
+        for (int i=0; i<k && i<size(nums); i++){
+            candidates[nums[i]]++;
+            candidates_counter++;
+        }
+        for (int i=k; i<size(nums); i++) add_num_to_candidates(nums[i]);
+    }
+    int add(int val) {
+        add_num_to_candidates(val);
+        return candidates.begin()->first;
+    }
+};
+```
