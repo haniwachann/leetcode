@@ -1,5 +1,5 @@
 ＜問題＞
-https://leetcode.com/problems/two-sum/
+https://leetcode.com/problems/number-of-islands/description/
 
 # step1
 
