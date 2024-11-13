@@ -23,7 +23,7 @@ private:
 
         seen.push(start_point);
         while (!seen.empty()) {
-            int x_connected,y_connected;
+            int x_connected, y_connected;
             tie(x_connected, y_connected) = seen.front();
             recognized_island[x_connected][y_connected] = '1';
             seen.pop();
@@ -98,7 +98,7 @@ private:
 
         seen.push(start_point);
         while (!seen.empty()) {
-            int x_connected,y_connected;
+            int x_connected, y_connected;
             tie(x_connected, y_connected) = seen.front();
             recognized_island[x_connected][y_connected] = '1';
             seen.pop();
@@ -213,7 +213,7 @@ private:
 
         seen.push(start_point);
         while (!seen.empty()) {
-            int x_connected,y_connected;
+            int x_connected, y_connected;
             tie(x_connected, y_connected) = seen.front();
             recognized_island[x_connected][y_connected] = '1';
             seen.pop();
