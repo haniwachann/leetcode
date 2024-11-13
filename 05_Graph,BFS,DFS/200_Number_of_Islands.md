@@ -19,7 +19,7 @@ private:
 //start_pointと同じ島である点を調べ上げる。
     void check_same_island (pair<int, int> start_point, vector<vector<char>>& grid) {
         queue<pair<int, int>> seen;
-        vector<pair<int ,int >> connected_point = {{1,0},{-1,0},{0,1},{0,1}};
+        vector<pair<int ,int >> connected_point = {{1,0},　{-1,0},　{0,1},　{0,1}};
 
         seen.push(start_point);
         while (!seen.empty()) {
@@ -27,7 +27,7 @@ private:
             tie(x_connected, y_connected) = seen.front();
             recognized_island[x_connected][y_connected] = '1';
             seen.pop();
-            for (int i=0; i<size(connected_point); i++) {
+            for (int i　=　0; i　<　size(connected_point); i++) {
                 int x,y;
                 x = x_connected + connected_point[i].first;
                 y = y_connected + connected_point[i].second;
@@ -94,7 +94,7 @@ private:
 //start_pointと同じ島である点を調べ上げる。
     void check_same_island (pair<int, int> start_point, vector<vector<char>>& grid) {
         queue<pair<int, int>> seen;
-        vector<pair<int ,int >> connected_point = {{1,0},{-1,0},{0,1},{0,1}};
+        vector<pair<int ,int >> connected_point = {{1,0},　{-1,0},　{0,1},　{0,1}};
 
         seen.push(start_point);
         while (!seen.empty()) {
@@ -102,7 +102,7 @@ private:
             tie(x_connected, y_connected) = seen.front();
             recognized_island[x_connected][y_connected] = '1';
             seen.pop();
-            for (int i=0; i<size(connected_point); i++) {
+            for (int i　=　0; i　<　size(connected_point); i++) {
                 int x,y;
                 x = x_connected + connected_point[i].first;
                 y = y_connected + connected_point[i].second;
@@ -209,7 +209,7 @@ private:
 //start_pointと同じ島である点を調べ上げる。
     void check_same_island (pair<int, int> start_point, vector<vector<char>>& grid) {
         queue<pair<int, int>> seen;
-        vector<pair<int ,int >> connected_point = {{1,0},{-1,0},{0,1},{0,1}};
+        vector<pair<int ,int >> connected_point = {{1,0},　{-1,0},　{0,1},　{0,1}};
 
         seen.push(start_point);
         while (!seen.empty()) {
@@ -217,7 +217,7 @@ private:
             tie(x_connected, y_connected) = seen.front();
             recognized_island[x_connected][y_connected] = '1';
             seen.pop();
-            for (int i=0; i<size(connected_point); i++) {
+            for (int i　=　0; i　<　size(connected_point); i++) {
                 int x,y;
                 x = x_connected + connected_point[i].first;
                 y = y_connected + connected_point[i].second;
