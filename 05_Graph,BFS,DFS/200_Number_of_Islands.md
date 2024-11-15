@@ -250,3 +250,71 @@ public:
     }
 };
 ```
+
+# step4
+レビューを受けてコードの修正。
+
+```c++
+class Solution {
+private:
+    int _row_size, _column_size;
+    int _num_island = 0;
+  
+// start_pointと同じ島である点を調べ上げる。
+    void check_same_island (pair<int, int> start_point, const vector<vector<char>>& grid,
+                            vector<vector<bool>> & visited_island ) {
+        queue<pair<int, int>> cells_to_visit;
+        const vector<pair<int ,int >> deltas = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+        cells_to_visit.push(start_point);
+        visited_island[start_point.first][start_point.second] = 1;
+        while (!cells_to_visit.empty()) {
+            auto [row_current, col_current] = cells_to_visit.front();
+            cells_to_visit.pop();
+            for (auto [delta_row, delta_col] : deltas) {
+                int row, col;
+                row = row_current + delta_row;
+                col = col_current + delta_col;
+                if( ! (row >= 0  && row < _row_size && col < _column_size && col >= 0 ) ){
+                    continue;
+                }
+                if (grid[row][col] == '0' || visited_island[row][col] == 1) {
+                    continue;
+                }
+                cells_to_visit.push({row, col});
+                visited_island[row][col] = 1;
+            }
+        }
+    }
+
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        vector<vector<bool>> visited_island; // 既に島として認識されている点を1とする。
+        _row_size = grid.size();
+        _column_size = grid[0].size();
+        visited_island.assign(_row_size, vector<bool>(_column_size, 0));
+      
+        for (int i = 0; i < _row_size; ++i) {
+            for (int j = 0; j < _column_size; ++j){
+                if (grid[i][j] == '0' || visited_island[i][j] == 1) {
+                    continue;
+                }
+                check_same_island ({i, j}, grid, visited_island);
+                ++_num_island;
+            }
+        }
+        return _num_island;
+    }
+};
+```
+
+- 定数の宣言に関して
+https://ttsuki.github.io/styleguide/cppguide.ja.html#Use_of_constexpr
+
+https://learn.microsoft.com/ja-jp/cpp/cpp/constexpr-cpp?view=msvc-170
+
+https://rinatz.github.io/cpp-book/ch07-05-constructors/
+
+https://stackoverflow.com/questions/27065617/const-vector-implies-const-elements
+
+- スレッドセーフについて
+https://www.divx.co.jp/media/techblog-220627
