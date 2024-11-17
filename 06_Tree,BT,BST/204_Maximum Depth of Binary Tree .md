@@ -71,11 +71,13 @@ public:
             return 0;
         }
         current_node = root;
-          node_to_visit.push(current_node);
+        node_to_visit.push(current_node);
         height[current_node] = 1;
+        max_depth=0;
         while (!node_to_visit.empty()) {
             current_node = node_to_visit.front();
-              node_to_visit.pop();
+            node_to_visit.pop();
+            max_depth = max(max_depth, height[current_node])
             if (current_node->left != nullptr) {
                 node_to_visit.push(current_node->left);
                 height[current_node->left] = height[current_node] + 1;
@@ -85,27 +87,33 @@ public:
                 height[current_node->right] = height[current_node] + 1;
             }
         }
-        return height.rbegin()->second;
+        return max_depth;
     }
 };
 ```
-
-
 
 - 空の配列を渡された時にも対応できるように修正
 - TreeNodeの変数でleft_nodeとright_nodeに分けていただが、変数までは作る必要がないかと判断。
 - スペースを修正しました。
 - frontとpopはなるべく近づけました
-- 幅優先で書いたほうがmapを使わなくても済むため良いか？
+- 上記解き方は、幅優先探索。
+- step1でのrbegin()では必ずしも最大深さにはならないので、たどるノードの最大値を出すように修正
+
+- pairはあまり使わないほうが良い
+https://github.com/rossy0213/leetcode/pull/10#discussion_r1564630314
+
+- 深さ優先探索ならstackで深さとノードを保持して、その都度今までの最大深さと今の深さを比較して、深さの最大値を更新していけば良い。
+https://github.com/Mike0121/LeetCode/pull/6/files
+
+- 同じ高さのノードをwhileの中で全て調べ切れば、各ノードの深さをずっと覚えておく必要はない。
+
 - もちろん再帰でも書ける。
 
 参考：https://github.com/hayashi-ay/leetcode/pull/22
 
--  幅優先探索でdequeに、ノードと高さを組みで取り出しと入れていく。
+- 幅優先探索でdequeに、ノードと高さを組みで取り出しと入れていく。
 
 https://github.com/fhiyo/leetcode/pull/23#discussion_r1675990961
-
-
 
 
 # step3
@@ -126,11 +134,13 @@ public:
             return 0;
         }
         current_node = root;
-        height[current_node] = 1;
         node_to_visit.push(current_node);
+        height[current_node] = 1;
+        max_depth=0;
         while (!node_to_visit.empty()) {
             current_node = node_to_visit.front();
             node_to_visit.pop();
+            max_depth = max(max_depth, height[current_node])
             if (current_node->left != nullptr) {
                 node_to_visit.push(current_node->left);
                 height[current_node->left] = height[current_node] + 1;
@@ -140,7 +150,7 @@ public:
                 height[current_node->right] = height[current_node] + 1;
             }
         }
-        return height.rbegin()->second;
+        return max_depth;
     }
 };
 ```
